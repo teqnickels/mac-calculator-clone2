@@ -1,0 +1,22 @@
+{
+  "name": "mac-calculator-clone2",
+  "version": "1.0.0",
+  "description": "mac calculator clone, second version",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teqnickels/mac-calculator-clone2.git"
+  },
+  "author": "Debrena McEwen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/teqnickels/mac-calculator-clone2/issues"
+  },
+  "homepage": "https://github.com/teqnickels/mac-calculator-clone2#readme",
+  "dependencies": {
+    "normalize.css": "^7.0.0"
+  }
+}
