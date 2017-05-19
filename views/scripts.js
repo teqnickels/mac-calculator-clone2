@@ -1,103 +1,167 @@
 (function() {
-  //===================================================
-  //1. Gather Requirements
-  //     1. What problem are you trying to solve
-  //2. Describe the app
-  //     1. Plain conversational language to describe the app.
-  //        Smallest set of stories that describe the app
-  //     2. You may create a mockup
-  // 3. Identify the main objects
-  //     1. Use the stories and describe the main points
-  // 4. Describe the interactions
-  //     1. Describe what the features  do and how they interact
-  // 5. Create a class diagram
-  //     1. All of this is on paper and no code yet
-  //===================================================
+  var TokenSorter = function() {
+    this.tokens = [];
+    this.operands = [];
+    this.operators = [];
+    this.operandStack = [];
+    this.operatorStack = [];
 
-//===================================================
-  //add entered numbers and operators into an tokens array
-  //pop numbers off of the tokens array into a operands stack
-  //pop operators off of  the tokens array and push onto a operator stack
-  //pop numbers off operand stack and pass to calculator function (param1, param2)?
-  //pop operator off operator stack and this will determine which calculator function to exe
-  //calculate param1 + param2 / param1/param2 / param1 * param2 / param1- param2 based on operator
-  //push results back on operand stack
-  //clear will remove the last entry
-  //clearStrict will remove everything in the operandStack and operatorStack
-//===================================================
-
-
-  var tokens = function(values) {
-    //whatever the user clicks, collect values from user entry put in arr
-    this.values = values
-    this.arr = []
-    this.length = 0 //add +1 to length with each entry
   }
 
-  var calculator = function(values, operator) {
-    this.values = values
-    this.operator = operator
-    this.operandStack = []
-    this.operatorStack = []
+  //simulated press for browser debugging
+  window.TokenSorter = TokenSorter;
+  TokenSorter.prototype.operationSorter = function(value) {
+    switch(value) {
+      case "+":
+      this.add(value1, value2, operators)
+      break;
+
+      case "-":
+
+      break;
+
+      case "*":
+
+      break;
+
+      case "/":
+
+      break;
+    }
   }
 
-  // var operandStack = function(arr) {
-  //   this.arr = [];
-  //   this.length = 0
+  // TokenSorter.prototype.sort = function() {
+  //   var operator = this.operators.pop()
+  //   var value1 = this.operands.pop()
+  //   var value2 = this.operands.pop()
+  //
+  //   switch(operator) {
+  //     case "+":
+  //       this.operands.push(value1 + value2)
+  //     break;
+  //   }
+  //   switch(operator) {
+  //     case "-":
+  //       this.operands.push(value1 - value2)
+  //     break;
+  //   }
+  //   switch(operator) {
+  //     case "*":
+  //       this.operands.push(value1 * value2)
+  //     break;
+  //   }
+  //   switch(operator) {
+  //     case "÷":
+  //       this.operands.push(value2/value1)
+  //     break;
+  //   }
   // }
 
-  // var operatorStack = function(arr) {
-  //   this.arr = arr;
-  //   this.length = 0
-  // }
 
-  calculator.prototype.add = function(value1, value2) {
+  TokenSorter.prototype.displayValue = function() {
+    return this.operands[this.operands.length-1]
+  }
+
+  TokenSorter.prototype.add = function(value1, value2) {
     this.operandStack.shift()
+    var num1 = this.operands.shift()
+    var num2 = this.operands.shift()
+    var operator = this.operators.shift()
+    result = value1 + value2;
+    operandStack.push(result)
+  }
+
+  TokenSorter.prototype.subtract = function(value1, value2) {
     var num1 = this.operandStack.shift()
     var num2 = this.operandStack.shift()
-    var operator = this.operatorStack.shift()
-    result = value1 + value2;
-    //push result to operand stack
   }
 
-  calculator.prototype.subtract(value1, value2) {
-    result = value1 - value2;
-    //push result to operand stack
+  TokenSorter.prototype.multiply = function(value1, value2) {
+    var num1 = this.operandStack.shift()
+    var num2 = this.operandStack.shift()
   }
 
-  calculator.prototype.multiply(value1, value2) {
-    result = value1 * value2
-    //push result to operand stack
+  TokenSorter.prototype.divide = function(value1, value2) {
+    var num1 = this.operandStack.shift()
+    var num2 = this.operandStack.shift()
   }
 
-  calculator.prototype.divide(value1, value2) {
-    result = value1 / value2
-    //push result to operand stack
+  TokenSorter.prototype.percentage = function(value1, value2) {
+    var num1 = this.operandStack.shift()
+    var num2 = this.operandStack.shift()
   }
 
-  calculator.prototype.percentage(value1, value2) {
-    //maff stuff....
+  TokenSorter.prototype.clearStrict = function() {
+    this.operandStack = [];
+    this.operatorStack = [];
   }
 
-  calculator.prototype.clear = function() {
-    //pop off last user entry
+  var mathOperators = ['+', '*', '÷', '%'];
+  var positive = '+'
+  var negative = '-'
+  var equals = '=';
+  var sort = new TokenSorter()
+
+
+  var onButtonClick = function(event) {
+    var value = event.target.innerText
+    sort.storeTokens(value)
+    console.log('BUTTONS', value);
+    // sort.tokens = [];
   }
 
-  calculator.prototype.clearStrict = function() {
-    //pop off everything on operator and operand stack
+  var allButtons = Array.from(document.querySelectorAll('button'))
+  allButtons.forEach(function(button){
+    button.addEventListener('click', onButtonClick)
+  })
+
+  TokenSorter.prototype.storeTokens = function(value) {
+    if(mathOperators.includes(value)) {
+      this.operands = this.tokens.slice()
+      this.sortOperands(this.operands)
+      this.sortOperators(value)
+    }else{
+      this.tokens.push(value)
+    }
   }
+
+
+  TokenSorter.prototype.sortOperands = function (arr) {
+    if(this.operands.length > 1) {
+      var value = this.operands.join('')
+      console.log('Operands', this.operands);
+      this.prepArrays(value)
+    } else {
+      console.log(this.operands, 'at sortOperators');
+      this.prepArrays(this.operators)
+    }
+  };
+
+  TokenSorter.prototype.sortOperators = function(value) {
+    this.operators.push(value)
+    console.log('OPERATORS PUSHED', this.operators);
+    this.prepArrays(this.operators)
+  }
+
+  TokenSorter.prototype.prepArrays = function(nums) {
+
+    var num = this.operands.shift()
+    this.operandStack.push(num)
+    this.operands = []
+    console.log('operands', this.operands);
+
+    this.operatorStack.push(this.operators)
+    this.operatorStack = []
+    this.operators = []
+    console.log('operator', this.operator);
+
+    this.tokens = [];
+    console.log('TOKENS ARR', this.tokens);
+
+    console.log('STACK operands', this.operandStack);
+  }
+
 
 
 
 })()
-
-
-
-
-
-
-// var calculator = new Calculator()
-// calculator.compute(5, 4, '*')
-// console.log(calculator.result()) // 20
-// calculator.compute()
-// console.log(calculator.result()) // 80
