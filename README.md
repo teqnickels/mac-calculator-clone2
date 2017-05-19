@@ -36,5 +36,21 @@ _...and this_
 - [ ] The mathematical operations for your calculator are each their own function, and are defined outside of any DOM event handler
 - [ ] When the length of the number displayed exceeds the width available, the font-size deterministically drops
 
+## Stage 3 Specs
+ - [ ] Each calculator acts independently.
+ - [ ] Clicking anywhere on a calculator focuses that calculator.
+ - [ ] Typing a relevant key affects the focused calculator.
+ - [ ] Use event delegation to avoid binding a click event listener to each button
+ - [ ] The focused calculator is opacity: 1
+ - [ ] The not-focused calculator is opacity: 0.5
 
+## General Specs
+General
 
+ - [ ] Repository includes a README file with basic installation and setup instructions.
+ - [ ] All package dependencies are properly declared in package.json.
+ - [ ] All major features are added via pull requests with a clear description and concise commit messages.
+ - [ ] Code uses a linter and there are no linting errors.
+ - [x] Variables, functions, files, etc. have appropriate and meaningful names.
+ - [x] Functions are small and serve a single purpose.
+ - [x] The artifact produced is properly licensed, preferably with the MIT license.
